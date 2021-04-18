@@ -1,7 +1,13 @@
+// const cors = require('cors');
+// const bodyParser = require('body-parser');
 const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const UserRouter = require('./routes/user.router')
+const UserRouter = require('./routes/user.router');
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost:27017/vacinacao',{
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
 
 const app = express();
 
