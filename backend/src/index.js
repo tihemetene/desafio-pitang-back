@@ -4,7 +4,7 @@ const express = require('express');
 const UserRouter = require('./routes/user.router');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/vacinacao',{
+mongoose.connect('mongodb://localhost:27017/{DATABASE_NAME}',{
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
