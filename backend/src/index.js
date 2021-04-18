@@ -1,15 +1,24 @@
-// const cors = require('cors');
-// const bodyParser = require('body-parser');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 const express = require('express');
-const UserRouter = require('./routes/user.router');
 const mongoose = require('mongoose');
+const morgan = require('morgan');
+const UserRouter = require('./routes/user.router');
+require('dotenv').config();
 
-mongoose.connect('mongodb://localhost:27017/{DATABASE_NAME}',{
+const {HTTP_PORT, MONGO_URL} = process.env;
+
+
+mongoose.connect(MONGO_URL,{
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
 
 const app = express();
+
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())
+app.use(morgan('dev'))
 
 app.get('/', (req, res) =>{
   res.json({message: "teste"})
@@ -17,6 +26,6 @@ app.get('/', (req, res) =>{
 
 app.use('/api', UserRouter); 
 
-app.listen(3333, () => {
-  console.log("Rodando na porta 3333");
+app.listen(HTTP_PORT, () => {
+  console.log(`Rodando na porta ${HTTP_PORT}`);
 })

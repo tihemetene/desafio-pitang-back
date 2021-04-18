@@ -4,8 +4,10 @@ const UserSchema = mongoose.Schema(
   {
   cpf: String,
   name: String,
-  age: String,
+  age: Number,
   date: String,
+  atendido: Boolean,
+  isIdoso: Boolean
 },
 { timestamps: true}
 );
