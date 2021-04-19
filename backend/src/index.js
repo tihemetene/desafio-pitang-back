@@ -15,10 +15,10 @@ mongoose.connect(MONGO_URL,{
 })
 
 const app = express();
-
-app.use(bodyParser.urlencoded({extended: false}))
-app.use(bodyParser.json())
-app.use(morgan('dev'))
+app.use(cors());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+app.use(morgan('dev'));
 
 app.get('/', (req, res) =>{
   res.json({message: "teste"})

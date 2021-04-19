@@ -6,6 +6,7 @@ const router = Router();
 
 router.get('/user', userController.index)
 router.get('/user/:id', userController.getOne)
+router.put('/user/:id', userController.update)
 router.delete('/user/:id', userController.remove)
 router.post('/user', userController.store)
 

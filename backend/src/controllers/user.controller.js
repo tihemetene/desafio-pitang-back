@@ -2,15 +2,12 @@ const UserModel = require('../models/user.model');
 
 class UserController{
   async index(req, res){
-    const users = await UserModel.find();
-    res.send({users})
+    const data = await UserModel.find();
+    res.send({data})
   }
 
   async store(req, res){
     const data = req.body;
-    if (data.age >= 60){
-      data.isIdoso === true;
-    }data.isIdoso === false;
     const user = await UserModel.create(data)
     res.send({user})
   }
@@ -25,6 +22,15 @@ class UserController{
     }catch(e){
       res.status(400).send({message: "Erro ao encontrar paciente."})
     }
+  }
+
+  async update(req, res){
+    const {params: {id}, body} = req;
+    const user = await UserModel.findOneAndUpdate(id, body).lean();
+      res.send({user: {
+        ...user,
+        ...body,
+      }})
   }
 
   async remove(req, res){
