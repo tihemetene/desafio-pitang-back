@@ -8,6 +8,7 @@ class UserController{
 
   async store(req, res){
     const data = req.body;
+    console.log(data)
     const user = await UserModel.create(data)
     res.send({user})
   }

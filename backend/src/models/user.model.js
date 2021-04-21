@@ -4,9 +4,9 @@ const UserSchema = mongoose.Schema(
   {
   cpf: String,
   name: String,
-  age: Number,
+  age: String,
   date: String,
-  atendido: Boolean,
+  isAtendido: Boolean,
   isIdoso: Boolean
 },
 { timestamps: true}
