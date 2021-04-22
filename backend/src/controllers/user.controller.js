@@ -8,9 +8,13 @@ class UserController{
 
   async store(req, res){
     const data = req.body;
+    const user = await UserModel.findOne({ cpf: data.cpf });
+    if(user){
+      return res.status(400).send({ message: "CPF já cadastrado."})
+    }
     console.log(data)
-    const user = await UserModel.create(data)
-    res.send({user})
+    const newUser = await UserModel.create(data)
+    res.send({user: newUser})
   }
 
   async getOne(req, res){
@@ -19,7 +23,6 @@ class UserController{
     try{
       const user = await UserModel.findById(id)
       res.send({user})
-
     }catch(e){
       res.status(400).send({message: "Erro ao encontrar paciente."})
     }
@@ -45,6 +48,22 @@ class UserController{
       res.status(400).send({message: e.message})
     }
   }
-}
+
+   async countData(req, res){
+     const { date } = req.params;
+     const datasMarcadas = await UserModel.find({
+       date: date,
+     }).count();
+     res.send({ data: datasMarcadas});
+   }
+
+   async countHour(req, res){
+     const { hour } = req.params;
+     const horaMarcada = await UserModel.find({
+       hour: hour,
+     }).count();
+     res.send({ data: horaMarcada})
+   }
+ }
 
 module.exports = new UserController()
