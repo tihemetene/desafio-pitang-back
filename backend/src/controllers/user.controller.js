@@ -30,11 +30,8 @@ class UserController{
 
   async update(req, res){
     const {params: {id}, body} = req;
-    const user = await UserModel.findOneAndUpdate(id, body).lean();
-      res.send({user: {
-        ...user,
-        ...body,
-      }})
+    const user = await UserModel.findByIdAndUpdate(id, body, {new: true});
+      res.send({data: user});
   }
 
   async remove(req, res){
@@ -58,8 +55,9 @@ class UserController{
    }
 
    async countHour(req, res){
-     const { hour } = req.params;
+     const { date, hour } = req.params;
      const horaMarcada = await UserModel.find({
+       date: date,
        hour: hour,
      }).count();
      res.send({ data: horaMarcada})

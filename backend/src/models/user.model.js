@@ -7,8 +7,9 @@ const UserSchema = mongoose.Schema(
   age: Number,
   date: String,
   hour: String,
-  isAtendido: Boolean,
-  isIdoso: Boolean
+  isAtendido: String,
+  isIdoso: Boolean,
+  note: String,
 },
 { timestamps: true}
 );
