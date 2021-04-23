@@ -31,7 +31,7 @@ class UserController{
   async update(req, res){
     const {params: {id}, body} = req;
     const user = await UserModel.findByIdAndUpdate(id, body, {new: true});
-      res.send({data: user});
+      res.send({data: user}); 
   }
 
   async remove(req, res){
